@@ -115,10 +115,10 @@ WSGI_APPLICATION = 'JobMarket.wsgi.application'
 DATABASES = {
     'default': {
          'ENGINE': 'sql_server.pyodbc',
-         'NAME': 'database-cloudcomputinglab4',
+         'NAME': 'database-cloudcomputing4',
          'USER': 'sampleLogin',
          'PASSWORD': 'samplePassword123!',
-         'HOST': 'server-cloudcomputinglab4.database.windows.net',
+         'HOST': 'server-cloudcomputing4.database.windows.net',
          'PORT': '1433',
          'OPTIONS': {
              'driver': 'ODBC Driver 17 for SQL Server',

@@ -1,6 +1,6 @@
 #!/bin/bash
 location="East US2"
-resourceIdentifier=cloudcomputinglab3
+resourceIdentifier=cloudcomputing4
 
 resource="resource-$resourceIdentifier"
 server="server-$resourceIdentifier"
