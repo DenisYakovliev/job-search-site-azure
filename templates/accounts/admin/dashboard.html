@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    База вакансий - Admin Job-Market
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="py-5" style="background: #fafafa;">
+            <div class="container text-center py-2">
+                <h1 class="block-title text-uppercase pb-3" style="font-weight: 600; letter-spacing: 0.1rem;">База
+                    вакансий</h1>
+                <h4 class="text-muted">База вакансий сайта</h4>
+            </div>
+        </div>
+
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-lg-12 text-right py-5 my-2">
+                    <a href="{% url 'admin_data_download_url' %}" class="btn btn-info">&#10149; Экспортировать
+                        данные</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" style="font-size: 0.8rem">
+                        <thead>
+                        <tr>
+                            <th>ID вакансии</th>
+                            <th>Компания</th>
+                            <th>Просмотры</th>
+                            <th>Дата создания</th>
+                            <th>Дата найма</th>
+                            <th>Комиссия сайта($)</th>
+                            <th>Нанято</th>
+                            <th>Управление</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for job in page_object %}
+                            <tr>
+                                <th><a href="{{ job.get_absolute_url }}"
+                                       style="font-size: 1rem; font-weight: 600">{{ job.id }}</a></th>
+                                <td>{{ job.user.company_name }}</td>
+                                <td>{{ job.views }}</td>
+                                <td>{{ job.created_at }}</td>
+                                <td>{{ job.last_date }}</td>
+                                <td style="font-size: 1rem; font-weight: 600">{{ job.price }}</td>
+                                <td>
+                                    {% if job.filled %}
+                                        <span class="badge badge-success p-2">Нанято</span>
+                                    {% else %}
+                                        <span class="badge badge-secondary p-2">Не нанято</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if job.filled %}
+                                        <a href="" class="btn btn-success btn-sm my-1">Нанято</a><br>
+                                    {% else %}
+                                        <a href="{{ job.get_update_url }}" class="btn btn-outline-info btn-sm my-1">&#9998;
+                                            Редактировать</a>
+                                        <br>
+                                    {% endif %}
+                                    <a href="{{ job.get_delete_url }}" class="btn btn-outline-danger btn-sm my-1">&#10006;
+                                        Удалить</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        {% if is_paginated %}
+            <nav aria-label="Page navigation example" class="mb-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item {% if not prev_url %} disabled {% endif %}">
+                        <a class="page-link" href="{{ prev_url }}" tabindex="-1">Previous</a>
+                    </li>
+                    {% for n in page_object.paginator.page_range %}
+                        {% if page_object.number == n %}
+                            <li class="page-item active">
+                                <a href="?page={{ n }}" class="page-link">{{ n }} <span class="sr-only">(current)</span></a>
+                            </li>
+                        {% elif n > page_object.number|add:-3 and n < page_object.number|add:3 %}
+                            <li class="page-item">
+                                <a href="?page={{ n }}" class="page-link ">{{ n }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    <li class="page-item {% if not next_url %} disabled {% endif %}">
+                        <a class="page-link" href="{{ next_url }}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        {% endif %}
+
+    </section>
+{% endblock %}

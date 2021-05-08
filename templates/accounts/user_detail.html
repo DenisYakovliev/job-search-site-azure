@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Профиль {{ user.get_full_name }} - Job-Market
+{% endblock %}
+
+{% block content %}
+    <section class="container py-5">
+        <div class="shadow p-5">
+            <h3 class="block-title section-title text-uppercase pb-5 text-center text-dark">Профиль <span class="text-info pl-2" style="font-weight: 600;">{{ user.get_full_name }}</span></h3>
+            {% if user.role == 'employee'%}
+                <h5 class="pt-3" style="font-weight: 600;">Имя:</h5>
+                <p class="pb-3 pt-1">{{ user.first_name }}</p>
+                <hr>
+                <h5 class="pt-3" style="font-weight: 600;">Фамилия:</h5>
+                <p class="pb-3 pt-1">{{ user.last_name }}</p>
+                <hr>
+                <h5 class="py-3" style="font-weight: 600;">Информация о пользователе:</h5>
+                <p class="">{{ user.about }}</p>
+            {% else %}
+                <h5 class="pt-3" style="font-weight: 600;">Компания:</h5>
+                <p class="pb-3 pt-1">{{ user.company_name }}</p>
+                <hr>
+                <h5 class="pt-3" style='font-weight: 600;'>Адрес Компании:</h5>
+                <p class="pb-3 pt-1">{{ user.company_address }}</p>
+                <hr>
+                <h5 class="py-3" style="font-weight: 600;">Информация о компании:</h5>
+                <p class="pb-3">{{ user.about }}</p>
+            {% endif %}
+            <div class="text-center pt-5">
+                <a href="{% url 'profile_update_url' %}" class="btn btn-info">&#9998; Редактировать профиль</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
