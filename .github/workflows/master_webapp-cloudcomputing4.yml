@@ -61,4 +61,4 @@ jobs:
         with:
           app-name: 'webapp-cloudcomputing4'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_9334d5dd1ead4ceea6160adfd200664f }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_96fce9dad99b4661979a7d45ca0032ea }}
