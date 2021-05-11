@@ -20,7 +20,7 @@ jobs:
     - name: Set up Python version
       uses: actions/setup-python@v1
       with:
-        python-version: '3.6'
+        python-version: '3.7'
 
     - name: Create and start virtual environment
       run: |
@@ -28,9 +28,7 @@ jobs:
         source venv/bin/activate
 
     - name: Install dependencies
-      run: |
-        sh bin/install_all_requirements.sh
-        sh bin/migrate.sh
+      run: pip install -r requirements.txt
 
     # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -61,4 +59,4 @@ jobs:
         with:
           app-name: 'webapp-cloudcomputing4'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_96fce9dad99b4661979a7d45ca0032ea }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_97cbaab32a7e4118ba2c775cc48403ff }}
