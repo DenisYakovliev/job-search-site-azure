@@ -61,6 +61,10 @@ values (
     'Some words about My-company'           
 );
 
+// delete all from table with Primary key
+DELETE FROM TABLENAME
+DBCC CHECKIDENT ('DATABASENAME.dbo.TABLENAME',RESEED, 0)
+
 insert into accounts_user
 values 
 ('samplePassword123!', GETDATE(), 0, 'Adam','Yakovliev',0,1, GETDATE(),'employer','denis.yakovliev1@hneu.com', 'Киев', 'My-company1', 'Some words about My-company'),
